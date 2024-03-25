@@ -1,4 +1,4 @@
-package com.livanov.continuousarchitecture;
+package com.livanov.continuousarchitecture.domain;
 
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
@@ -12,7 +12,7 @@ public class Person {
 
     @Id
     @Getter
-    private Integer id;
+    private String id;
 
     @Getter
     private String name;

@@ -1,5 +1,6 @@
 package com.livanov.continuousarchitecture;
 
+import com.livanov.continuousarchitecture.persistence.DummyDataGenerator;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,8 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
-import java.time.LocalDate;
-
 @SpringBootApplication
 public class ContinuousArchitectureApplication {
 
@@ -20,12 +19,8 @@ public class ContinuousArchitectureApplication {
     }
 
     @Bean
-    ApplicationRunner runner(PeopleRepository peopleRepository) {
-        return args -> {
-            peopleRepository.save(new Person("Lyubo", LocalDate.of(1919, 2, 26)));
-            peopleRepository.save(new Person("John", LocalDate.of(2020, 4, 22)));
-            peopleRepository.save(new Person("Steve", LocalDate.of(2001, 12, 7)));
-        };
+    ApplicationRunner runner(DummyDataGenerator generator) {
+        return args -> generator.generate();
     }
 
     @Configuration
